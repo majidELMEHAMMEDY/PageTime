@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OMPIC_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Brevets">
+    <Key>
+      <PropertyRef Name="num_brevet" />
+    </Key>
+    <Property Name="num_brevet" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="description" Type="nvarchar(max)" />
+    <Property Name="date_depot" Type="datetime" Nullable="false" />
+    <Property Name="date_validation" Type="datetime" Nullable="false" />
+    <Property Name="N_Num_inventeur" Type="int" />
+    <Property Name="Ne_Num_invention" Type="int" />
+  </EntityType>
+  <EntityType Name="Domaines">
+    <Key>
+      <PropertyRef Name="Num_domaine" />
+    </Key>
+    <Property Name="Num_domaine" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nom_domaine" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="motdepasse" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Entreprises">
+    <Key>
+      <PropertyRef Name="Num_entreprise" />
+    </Key>
+    <Property Name="Num_entreprise" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nom_entrepris" Type="nvarchar(max)" />
+    <Property Name="activite" Type="nvarchar(max)" />
+    <Property Name="CA" Type="int" Nullable="false" />
+    <Property Name="adresseE" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Inventeurs">
+    <Key>
+      <PropertyRef Name="Num_inventeur" />
+    </Key>
+    <Property Name="Num_inventeur" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nom" Type="nvarchar(max)" />
+    <Property Name="prenom" Type="nvarchar(max)" />
+    <Property Name="adressI" Type="nvarchar(max)" />
+    <Property Name="date_naiss" Type="datetime" Nullable="false" />
+    <Property Name="age" Type="int" Nullable="false" />
+    <Property Name="N_Num_entreprise" Type="int" />
+  </EntityType>
+  <EntityType Name="Inventions">
+    <Key>
+      <PropertyRef Name="Num_invention" />
+    </Key>
+    <Property Name="Num_invention" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="description" Type="nvarchar(max)" />
+    <Property Name="resume" Type="nvarchar(max)" />
+    <Property Name="N_Num_domaine" Type="int" />
+  </EntityType>
+  <Association Name="FK_dbo_Brevets_dbo_Inventeurs_N_Num_inventeur">
+    <End Role="Inventeurs" Type="Self.Inventeurs" Multiplicity="0..1" />
+    <End Role="Brevets" Type="Self.Brevets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Inventeurs">
+        <PropertyRef Name="Num_inventeur" />
+      </Principal>
+      <Dependent Role="Brevets">
+        <PropertyRef Name="N_Num_inventeur" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Brevets_dbo_Inventions_Ne_Num_invention">
+    <End Role="Inventions" Type="Self.Inventions" Multiplicity="0..1" />
+    <End Role="Brevets" Type="Self.Brevets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Inventions">
+        <PropertyRef Name="Num_invention" />
+      </Principal>
+      <Dependent Role="Brevets">
+        <PropertyRef Name="Ne_Num_invention" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Inventeurs_dbo_Entreprises_N_Num_entreprise">
+    <End Role="Entreprises" Type="Self.Entreprises" Multiplicity="0..1" />
+    <End Role="Inventeurs" Type="Self.Inventeurs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entreprises">
+        <PropertyRef Name="Num_entreprise" />
+      </Principal>
+      <Dependent Role="Inventeurs">
+        <PropertyRef Name="N_Num_entreprise" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Inventions_dbo_Domaines_N_Num_domaine">
+    <End Role="Domaines" Type="Self.Domaines" Multiplicity="0..1" />
+    <End Role="Inventions" Type="Self.Inventions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Domaines">
+        <PropertyRef Name="Num_domaine" />
+      </Principal>
+      <Dependent Role="Inventions">
+        <PropertyRef Name="N_Num_domaine" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="OMPIC_DBModelStoreContainer">
+    <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Brevets" EntityType="Self.Brevets" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Domaines" EntityType="Self.Domaines" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Entreprises" EntityType="Self.Entreprises" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Inventeurs" EntityType="Self.Inventeurs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Inventions" EntityType="Self.Inventions" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_dbo_Brevets_dbo_Inventeurs_N_Num_inventeur" Association="Self.FK_dbo_Brevets_dbo_Inventeurs_N_Num_inventeur">
+      <End Role="Inventeurs" EntitySet="Inventeurs" />
+      <End Role="Brevets" EntitySet="Brevets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Brevets_dbo_Inventions_Ne_Num_invention" Association="Self.FK_dbo_Brevets_dbo_Inventions_Ne_Num_invention">
+      <End Role="Inventions" EntitySet="Inventions" />
+      <End Role="Brevets" EntitySet="Brevets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Inventeurs_dbo_Entreprises_N_Num_entreprise" Association="Self.FK_dbo_Inventeurs_dbo_Entreprises_N_Num_entreprise">
+      <End Role="Entreprises" EntitySet="Entreprises" />
+      <End Role="Inventeurs" EntitySet="Inventeurs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Inventions_dbo_Domaines_N_Num_domaine" Association="Self.FK_dbo_Inventions_dbo_Domaines_N_Num_domaine">
+      <End Role="Domaines" EntitySet="Domaines" />
+      <End Role="Inventions" EntitySet="Inventions" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="713a636e23d44a4e801e7dcd5863cb4a" Name="Diagram1">
+        <EntityTypeShape EntityType="OMPIC_DBModel.C__MigrationHistory" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OMPIC_DBModel.Brevets" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="OMPIC_DBModel.Domaines" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OMPIC_DBModel.Entreprises" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OMPIC_DBModel.Inventeurs" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OMPIC_DBModel.Inventions" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="OMPIC_DBModel.FK_dbo_Brevets_dbo_Inventeurs_N_Num_inventeur" ManuallyRouted="false" />
+        <AssociationConnector Association="OMPIC_DBModel.FK_dbo_Brevets_dbo_Inventions_Ne_Num_invention" ManuallyRouted="false" />
+        <AssociationConnector Association="OMPIC_DBModel.FK_dbo_Inventions_dbo_Domaines_N_Num_domaine" ManuallyRouted="false" />
+        <AssociationConnector Association="OMPIC_DBModel.FK_dbo_Inventeurs_dbo_Entreprises_N_Num_entreprise" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

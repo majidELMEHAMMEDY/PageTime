@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "LogIn";
+}
+
+<h2>Main page</h2>
+<button id="MyButton">Click Me</button>
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script>
+
+    var date, EndTime
+    window.onload = function () {
+        date = new Date();
+    }
+
+    document.getElementById('MyButton').addEventListener('click', () => {
+        
+         this.EndTime = new Date() - this.date;
+
+   
+        var text = { 'EndTime': this.EndTime };
+        $.ajax({
+            url: 'https://localhost:44344//DB/GetTimeConnection',
+            cache: false,
+            type: "GET",
+            data: text,
+            contentType: 'application/json; charset=utf-8',
+            dataType: "json",
+            success: function (data) {
+
+                
+            },
+            error: function (error) {
+                
+
+            },
+            complete: function () {
+            }
+        });
+    })
+</script>

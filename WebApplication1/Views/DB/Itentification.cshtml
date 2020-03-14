@@ -1,0 +1,38 @@
+﻿@model WebApplication1.Models.Domaine
+@{
+    ViewBag.Title = "Itentification";
+}
+
+<h2>Itentification</h2>
+@using (Html.BeginForm("Itentification", "Db", FormMethod.Post))
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                @Html.LabelFor(c => c.Nom_domaine)
+            </div>
+            <div class="col-md-4">
+                @Html.EditorFor(c => c.Nom_domaine, new { htmlAttributes = new { @class = "form-control", @style = "margin:5px" } })
+                @Html.ValidationMessageFor(c => c.Nom_domaine, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+
+                @Html.LabelFor(c => c.motdepasse)
+            </div>
+            <div class="col-md-4">
+
+                @Html.EditorFor(c => c.motdepasse, new { htmlAttributes = new { @type = "password", @class = "form-control", @style = "margin:5px" } })
+                @Html.ValidationMessageFor(c => c.motdepasse, "", new { @class = "text-danger" })
+              
+
+            </div>
+
+        </div>
+        <div class="row">
+            <input type="submit" name="name" value="Login" class="btn btn-primary" />
+        </div>
+    </div>
+}
